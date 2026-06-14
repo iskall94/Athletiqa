@@ -1,0 +1,1 @@
+export { default as SponsorProfile } from "./ui/SponsorProfile"

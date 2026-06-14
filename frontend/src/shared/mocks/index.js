@@ -1,0 +1,9 @@
+export { mockUsers } from "./user";
+export { mockAthletes } from "./athlete";
+export { mockPosts } from "./posts";
+export { mockCampaigns } from "./campaigns";
+export { mockComments } from "./comments";
+export { mockSports } from "./sports";
+export { mockSponsors } from "./sponsor";
+export { mockMedals } from "./medals";
+export { mockDonations } from "./donations";

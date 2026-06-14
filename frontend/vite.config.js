@@ -1,0 +1,19 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import svgr from "vite-plugin-svgr";
+
+export default defineConfig({
+  plugins: [react(), tailwindcss(), svgr()],
+  
+  server: {
+    host: true,
+    port: 5173,
+    allowedHosts: true,
+    watch: {
+      usePolling: true // Enable polling for file changes (useful in Docker environments)
+    }
+  }
+})
+
+

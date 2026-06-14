@@ -1,0 +1,1 @@
+export { default as AthleteProfilePage } from "./ui/AthleteProfilePage";

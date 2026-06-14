@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@layer base {
+    /* Hide Edge's built-in password reveal — we have our own */
+    input[type="password"]::-ms-reveal,
+    input[type="password"]::-ms-clear {
+        display: none;
+    }
+    html, body, #root {
+        width: 100%;
+        min-height: 100vh;
+    }
+    body {
+        background-color: var(--color-bg);
+        color: var(--color-gray-700);
+        font-family: var(--font-sans);
+    }    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+    }
+}
+
+@layer utilities {
+  .scrollbar-themed {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) transparent;
+  }
+
+  /* WebKit (Chrome, Edge, Safari) */
+  .scrollbar-themed::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-themed::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 4px 0;
+  }
+  .scrollbar-themed::-webkit-scrollbar-thumb {
+    background: var(--color-primary-light);
+    border-radius: 9999px;
+  }
+  .scrollbar-themed::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Global CSS variables for consistent theming across the application, based on the figma boards UI kits */
+@theme {
+    /* === Typography === */
+    --font-sans:    "Karla", ui-sans-serif, system-ui, sans-serif; /* default body font */
+    --font-heading: "Rubik", ui-sans-serif, system-ui, sans-serif; /* headings only */
+
+    /* === Brand === */
+    --color-primary:        #0E3B6A; /* navy — main brand, buttons, headings */
+    --color-primary-light:  #C2D7ED; /* muted sky blue — hover/secondary states */
+
+    --color-accent:         #FFDF8F; /* amber gold — CTA buttons, highlights */
+    --color-accent-light:   #FFF0CC; /* soft gold — card backgrounds, badges */
+    --color-accent-pale:    #fef5d4; /* cream yellow — subtle fills, FAQ bg */
+
+    /* === Backgrounds === */
+    --color-bg:             #FAF9F6; /* warm off-white — default page background */
+    --color-surface:        #ffffff; /* pure white — cards, modals */
+
+    /* === Grays === */
+    --color-gray-100:       #f0eeeb; /* lightest — dividers, input fillers */
+    --color-gray-300:       #D4D4D4; /* light — borders, placeholders */
+    --color-gray-500:       #909090; /* medium — secondary text, icons */
+    --color-gray-700:       #252422; /* dark — body text, labels */
+
+    /* === Semantic === */
+    --color-error:          #EC080C; /* red — validation errors */
+    --color-success:        #289700; /* green — confirmations */ 
+    --color-warning:        #FFBF20; /* amber — alerts */
+}

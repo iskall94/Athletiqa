@@ -1,0 +1,84 @@
+# Dev Version - Please do not change / use for production
+
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: app-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${DB_PASSWORD}
+      SA_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"${DB_PASSWORD}\" -C -Q \"SELECT 1\" || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+    volumes:
+      - db_data:/var/opt/mssql
+    networks:
+      - app-network
+    ports:
+      - "11433:1433"
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: app-backend
+    platform: linux/amd64
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Server=database;Database=AthletiqaDB;User ID=sa;Password=${DB_PASSWORD};TrustServerCertificate=True"
+      EmailSettings__Host: mailpit
+      EmailSettings__Port: 1025
+      Stripe__SecretKey: ${STRIPE_SECRET_KEY}
+      Stripe__WebhookSecret: ${STRIPE_WEBHOOK_SECRET}
+      Cloudinary__CloudName: ${CLOUDINARY_CLOUD_NAME}
+      Cloudinary__ApiKey: ${CLOUDINARY_API_KEY}
+      Cloudinary__ApiSecret: ${CLOUDINARY_API_SECRET}
+      Cloudinary__RootFolder: "athletiqa/dev"
+    restart: on-failure
+    ports:
+      - "5000:8080"
+    depends_on:
+      database:
+        condition: service_healthy      
+      mailpit:
+        condition: service_started
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+    container_name: app-frontend
+    platform: linux/amd64
+    volumes:
+      - ./frontend:/app   # Mounts the frontend source code into the container for live development
+      - /app/node_modules # Prevents overwriting node_modules with the host's empty directory
+    ports:
+      - "3000:5173"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: app-mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025" # SMTP Port
+      - "8025:8025" # Web UI Port
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:

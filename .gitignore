@@ -1,0 +1,10 @@
+bin/
+obj/
+node_modules/
+.env
+.env.example
+.vscode/
+.vs
+gitlab-runner/
+backend/appsettings.Development.json
+/backend/backend.csproj.lscache
