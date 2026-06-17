@@ -1,3 +1,15 @@
+### A copy of our ReadMe from GitLab as part of the Chas Academy, Chas Challenge project were we worked in a team of 10 people to simulate how working in a team is really like at a workplace.
+
+The team was:
+- 5 .NET developers
+- 2 UX designers
+- 1 UX designer with focus on Mobile
+- 2 Devops
+
+This project was worked on from end of March - end of May, where it was presented in early June.
+
+---
+
 # Athletiqa
 
 
@@ -57,7 +69,6 @@ Password: ********
 Email: sponsor@athletiqa.com
 Password: ********
 
-Athletiqa is a platform that enables athletes to find and create connections with sponsors. Athletes post updates and start campaigns showcasing a hint into their sport-life, and sponsors donate, earn medals and chat with athletes through messages and notifications.
 ## Project Overview
 Athletiqa is a platform that enables athletes to find and create connections with sponsors. Athletes post updates and start campaigns showcasing a hint into their sport-life, and sponsors donate, earn medals and chat with athletes through messages and notifications.
 
