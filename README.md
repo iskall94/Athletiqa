@@ -3,7 +3,7 @@
 The team was:
 - 5 .NET developers
 - 2 UX designers
-- 1 UX designer with focus on Mobile
+- 1 UX designer with Mobile focus
 - 2 Devops
 
 This project was worked on from end of March - end of May, where it was presented in early June.
